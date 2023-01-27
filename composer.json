@@ -1,6 +1,6 @@
 {
     "name": "nearata/flarum-ext-encrypt-mail",
-    "description": "No desc",
+    "description": "Encrypt outgoing emails with PGP",
     "keywords": [
         "flarum"
     ],
