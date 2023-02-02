@@ -24,6 +24,7 @@ class EncryptMailModel extends AbstractModel
 
     public static function findByEmailOrCreate(string $email): ?self
     {
+        /** @var ?self */
         $f = static::whereHas('user', function ($query) use ($email) {
             $query->where('email', $email);
         })->first();

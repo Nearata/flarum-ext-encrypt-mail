@@ -1,5 +1,5 @@
 nearata-encrypt-mail:
-  admin:
-    my_cool_key: My Cool Key
   forum:
-    my_cool_key: My Cool Key
+    settings:
+      field_label: GPG Public Key
+      save_changes: Save Changes

@@ -2,19 +2,20 @@
 
 namespace Nearata\EncryptMail;
 
+use Flarum\Api\Serializer\UserSerializer;
 use Flarum\Extend;
+use Flarum\User\User;
 use Illuminate\Mail\Events\MessageSending;
+use Nearata\EncryptMail\Api\Controller\UpdatePublicKeyController;
+use Nearata\EncryptMail\Api\Serializer\UserSerializerAttributes;
 use Nearata\EncryptMail\Filesystem\EncryptMailDisk;
 use Nearata\EncryptMail\Listener\MessageSendingListener;
+use Nearata\EncryptMail\Model\EncryptMailModel;
 
 return [
     (new Extend\Frontend('forum'))
         ->js(__DIR__.'/js/dist/forum.js')
         ->css(__DIR__.'/less/forum.less'),
-
-    (new Extend\Frontend('admin'))
-        ->js(__DIR__.'/js/dist/admin.js')
-        ->css(__DIR__.'/less/admin.less'),
 
     new Extend\Locales(__DIR__.'/locale'),
 
@@ -23,4 +24,13 @@ return [
 
     (new Extend\Event)
         ->listen(MessageSending::class, MessageSendingListener::class),
+
+    (new Extend\Model(User::class))
+        ->hasOne('nearata_encrypt_mail', EncryptMailModel::class, 'id'),
+
+    (new Extend\ApiSerializer(UserSerializer::class))
+        ->attributes(UserSerializerAttributes::class),
+
+    (new Extend\Routes('api'))
+        ->post('/nearata/encryptMail/updatePublicKey', 'nearata.encrypt-mail.update-public-key', UpdatePublicKeyController::class)
 ];
