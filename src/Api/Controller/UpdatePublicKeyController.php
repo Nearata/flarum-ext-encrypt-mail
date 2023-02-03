@@ -27,7 +27,12 @@ class UpdatePublicKeyController implements RequestHandlerInterface
 
         $enc = EncryptMailModel::findByEmailOrCreate($actor->email);
 
+        if ($enc->public_key == $value) {
+            throw new BadRequestException;
+        }
+
         $enc->public_key = $value;
+        $enc->imported = false;
         $enc->save();
 
         return new EmptyResponse;
