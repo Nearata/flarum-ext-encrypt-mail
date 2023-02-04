@@ -71,7 +71,7 @@ class MessageSendingListener
             return true;
         }
 
-        if (is_null($r->public_key)) {
+        if (is_null($r->public_key) || empty($r->public_key)) {
             exec("echo Hello, World! | gpg --always-trust -e -a -r $email", $_, $returnCode);
 
             if ($returnCode == 0) {
