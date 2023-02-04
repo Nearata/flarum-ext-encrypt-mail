@@ -17,6 +17,8 @@ class EncryptMailModel extends AbstractModel
 
     protected $fillable = ['id', 'public_key'];
 
+    public $timestamps = true;
+
     public function user()
     {
         return $this->belongsTo(User::class, 'id');
