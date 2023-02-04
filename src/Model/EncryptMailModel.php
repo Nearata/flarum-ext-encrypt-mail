@@ -9,6 +9,8 @@ use Flarum\User\User;
  * @property int $id
  * @property string $public_key
  * @property boolean $imported
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  * @property User $user
  */
 class EncryptMailModel extends AbstractModel
@@ -18,6 +20,11 @@ class EncryptMailModel extends AbstractModel
     protected $fillable = ['id', 'public_key'];
 
     public $timestamps = true;
+
+    protected $dates = [
+        'created_at',
+        'updated_at'
+    ];
 
     public function user()
     {

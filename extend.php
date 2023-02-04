@@ -11,6 +11,7 @@ use Nearata\EncryptMail\Api\Serializer\UserSerializerAttributes;
 use Nearata\EncryptMail\Filesystem\EncryptMailDisk;
 use Nearata\EncryptMail\Listener\MessageSendingListener;
 use Nearata\EncryptMail\Model\EncryptMailModel;
+use Nearata\EncryptMail\Throttler\UpdatePublicKeyThrottler;
 
 return [
     (new Extend\Frontend('forum'))
@@ -32,5 +33,8 @@ return [
         ->attributes(UserSerializerAttributes::class),
 
     (new Extend\Routes('api'))
-        ->post('/nearata/encryptMail/updatePublicKey', 'nearata.encrypt-mail.update-public-key', UpdatePublicKeyController::class)
+        ->post('/nearata/encryptMail/updatePublicKey', 'nearata.encrypt-mail.update-public-key', UpdatePublicKeyController::class),
+
+    (new Extend\ThrottleApi)
+        ->set('nearataEncryptMail', UpdatePublicKeyThrottler::class)
 ];
