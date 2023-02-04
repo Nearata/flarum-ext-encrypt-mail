@@ -68,6 +68,10 @@ export default class SettingsPublicKey extends Component {
         method: "POST",
         body: { publicKey: this.content() },
       })
-      .then(() => location.reload());
+      .then(() => location.reload())
+      .catch(() => {
+        this.loading = false;
+        m.redraw();
+      });
   }
 }
