@@ -1,6 +1,6 @@
 # Encrypt Mail
 
-A [Flarum](http://flarum.org) extension. No desc
+> Encrypt outgoing emails with PGP.
 
 ## Install
 
