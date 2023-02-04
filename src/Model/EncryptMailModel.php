@@ -32,7 +32,7 @@ class EncryptMailModel extends AbstractModel
         })->first();
 
         if (is_null($f)) {
-            /** @var User */
+            /** @var ?User */
             $user = User::where('email', $email)->first();
 
             if (is_null($user)) {
